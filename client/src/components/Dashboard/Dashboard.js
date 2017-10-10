@@ -38,12 +38,14 @@ class Dashboard extends Component {
 
 	getFriends = (mode) => {
 		let activeUser = firebase.auth().currentUser.uid
-		Axios.get(`api/user/${activeUser}/friends/${mode}`)
+		if (!mode) {
+			Axios.get(`api/user/${activeUser}/friends/${mode}`)
 			.then(res => {
 				this.setState({friends: res.data})
 			}).catch(function(error) {
 				console.error(error)
 			})
+		}
 	}
 
 	getLvl = () => {

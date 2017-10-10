@@ -62,7 +62,7 @@ class Gamelist extends Component {
     // const gameID = 213460;
     console.log("<<<<getting second argument in handleNewGameSubmit1");
     console.log(owned);
-    {this.props.increaseExp(10)}
+    this.props.increaseExp(10);
     console.log("subbing new game");
     this.props.notification("New game added! +10 EXP!");
     let userId = firebase.auth().currentUser.uid;
