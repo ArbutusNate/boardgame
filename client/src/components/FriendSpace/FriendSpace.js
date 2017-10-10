@@ -3,18 +3,20 @@ import "./FriendSpace.css";
 import noFriends from "../../assets/img/noFriends.png";
 import {Modal, Button} from "react-materialize";
 import Friendslist from "../Friendslist";
-import FriendDashProfile from "../FriendProfileDash";
+import FriendProfileDash from "../FriendProfileDash";
 import {Carousel} from "react-materialize";
+import ReactTooltip from 'react-tooltip';
 
 
 class FriendSpace extends Component {
   conditional = props => {
     let friends = this.props.friends.map((element, i) => {
-            return <div key={"fc" + element.uid + i}><FriendDashProfile level={element.level} userName={element.name} cardNum={element.cardNum} /></div>
+            return <div key={"fc" + element.uid + i}><FriendProfileDash {...props} level={element.level} userName={element.name} cardNum={element.cardNum} /></div>
           })
     if (this.props.friends.length > 0){
       return (
         <Carousel options={{ fullWidth: false }}>
+          <ReactTooltip/>
           {friends}
         </Carousel>
         )

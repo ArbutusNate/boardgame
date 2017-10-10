@@ -280,10 +280,26 @@ router.delete("/user/deletefriend/:uid/:userToDelete", (req, res) => {
 })
 
 //Route for gettting active user's friends
-router.get("/user/:uid/friends", (req, res) => {
+router.get("/user/:uid/friends/:gameCompare?", (req, res) => {
 	console.log("These are the users friends.");
 	User.findOne({ _id : req.params.uid}).populate("friends").exec((error, result) => {
-		res.json(result.friends);
+		let routeMode = req.params.gameCompare;
+			if (!routeMode) {
+				res.json(result.friends);
+			} else {
+				console.log("running the gamelist comparer!");
+			}
+		// let myWishlistComp = result.wishlist;
+		// let friendsGamelist = [];
+		// result.friends.map((friend) => {
+		// 	console.log("friends map mapping")
+			// console.log(friend.games);
+		// 	console.log(myWishlistComp);
+		// })
+		// for (i = 0; i <= myWishlistComp; i++) {
+		// 	for (j = 0; j <= friendsGamelist.length; j++) {
+		// 	}
+		// }
 	})
 })
 

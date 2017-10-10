@@ -18,6 +18,7 @@ class Friendslist extends Component {
 		let activeUser = firebase.auth().currentUser.uid
 		Axios.get(`api/user/${activeUser}/friends`)
 			.then(res => {
+				console.log(res.data);
 				this.setState({friends: res.data, friendsView: 'mine'})
 			}).catch(function(error) {
 				console.error(error)

@@ -6,7 +6,7 @@ import firebase from "firebase";
 import Newsfeed from "../Newsfeed";
 import HoverButtons from "../HoverButtons";
 import Background from "../Background"
-import Discord from "../Discord"
+// import Discord from "../Discord"
 import logo from "../../assets/img/logo.png"
 import LevelBar from "../LevelBar";
 import UserProfile from "../UserProfile";
@@ -36,9 +36,9 @@ class Dashboard extends Component {
 			})
 	}
 
-	getFriends = () => {
+	getFriends = (mode) => {
 		let activeUser = firebase.auth().currentUser.uid
-		Axios.get(`api/user/${activeUser}/friends`)
+		Axios.get(`api/user/${activeUser}/friends/${mode}`)
 			.then(res => {
 				this.setState({friends: res.data})
 			}).catch(function(error) {
@@ -65,7 +65,7 @@ class Dashboard extends Component {
 
 			if (thingToUpdate === "friends"){
 				this.getNotifications();
-				this.getFriends();
+				// this.getFriends();
 				this.notify("New friend added! How nice! +50xp")
 				this.props.increaseExp(50);
 			}
@@ -76,7 +76,6 @@ class Dashboard extends Component {
 		})
 
 	};
-
 
 	notify = text => toast(text);
 
@@ -103,16 +102,14 @@ class Dashboard extends Component {
 		        </div>
 
 		        <div className="row dashRow">
-		          	<Friendspace friends={this.state.friends}/>
+		          	<Friendspace {...props} friends={this.state.friends}/>
 		        </div>
-		         
-	      			
+
 		      </div>
-		     
-		      
+
 		      <LevelBar exp={this.props.exp} toNextLevel={this.props.toNextLevel}/>
 		      <HoverButtons notifications={this.state.notifications} getNotifications={this.getNotifications}/>
-		      <ToastContainer 
+		      <ToastContainer
           position="top-right"
           type="default"
           autoClose={5000}

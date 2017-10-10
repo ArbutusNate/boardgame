@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Gamelist.css";
 import Axios from "axios";
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import SearchListItem from "../SearchListItem";
 import ListItem from "../ListItemTemp"
 import firebase from "firebase";
@@ -171,7 +171,6 @@ class Gamelist extends Component {
 
               <Collection className="gamelistGames" id="gamelist-games" defaultActiveKey={0} style={{visibility: this.state.collVis ? 'visible' : 'hidden'}}>
                 <SearchListItem
-                  // expanded={true}
                   dataResults={this.state.searchArray}
                   saveGame={this.handleNewGameSubmit1}
                   preloader={this.state.preloader}
