@@ -384,9 +384,16 @@ router.post("/groups/newgroup", (req, res) => {
 					let options = {upsert: true, new: true};
 					Group.findOneAndUpdate(conditions, update, options, (err, response) => {
 						console.log(response._id);
-						User.findOneAndUpdate({ _id: req.body.creatorID }, {$push: {groups: response._id}})
-							.exec(response => res.json(response))
-							.catch(error => console.log(error))
+						conditions = {_id: req.body.creatorID};
+						update = {$push: {groups: response._id}};
+						options = {new: true};
+						User.findOneAndUpdate(conditions, update, options, (err, response) => {
+							if(!err) {
+								res.json(response);
+							} else {
+								console.log(err);
+							}
+						})
 					})
 			} else {
 				//if group does exist, return warning:

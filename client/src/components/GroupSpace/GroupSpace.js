@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "./GroupSpace.css";
-import {Button, Modal, Input} from "react-materialize";
+import {Button, Modal, Input, Carousel} from "react-materialize";
 
 class GroupSpace extends Component {
 
@@ -20,7 +20,7 @@ class GroupSpace extends Component {
       groupDesc: this.state.groupDesc,
       groupLoc: this.state.groupLoc
     }).then(response => {
-      console.log(response);
+      this.setState({groups: response.data.groups})
     }).catch(error => {
       console.log(error);
     })
@@ -42,6 +42,10 @@ class GroupSpace extends Component {
       <div className="col s12 center grouplistBox">
         <div className="groupspaceHeader">
           <h2 className="grouplistHeader">Groups</h2>
+
+          {/*<Carousel className="group-carousel" options={{fullWidth : false}}>
+          </Carousel>
+          */}
 
           <Modal
             header="Create a group"

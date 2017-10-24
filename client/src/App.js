@@ -34,9 +34,9 @@ class App extends Component {
 		this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
 			if (user) {
 				let userName = user.email.split("@")[0]
-				console.log(userName)
-				Axios.post("/api/user/" + user.uid + "/" + userName + "/" + user.email)
+				Axios.post(`/api/user/${user.uid}/${userName}/${user.email}`)
 						.then((response) => {
+							console.log(response);
 							this.setState({
 							level: response.data.level,
 							UID: user.uid,
@@ -48,8 +48,6 @@ class App extends Component {
 							cardNum: response.data.cardNum,
 							groups: response.data.groups
 							});
-		    			console.log("searching database for user:");
-		    			console.log(response);
 		    		})
 				// Axios.post(`/api/user/${user.uid}/${userName}`)
 				// .then((response, error) => {
