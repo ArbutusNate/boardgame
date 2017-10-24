@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "./GroupSpace.css";
+import ContentFrame from "../ContentFrame";
 import {Button, Modal, Input, Carousel} from "react-materialize";
 
 class GroupSpace extends Component {
@@ -43,9 +44,9 @@ class GroupSpace extends Component {
         <div className="groupspaceHeader">
           <h2 className="grouplistHeader">Groups</h2>
 
-          {/*<Carousel className="group-carousel" options={{fullWidth : false}}>
+          <Carousel className="group-carousel" options={{fullWidth : false}}>
+            <div> contentframe </div>
           </Carousel>
-          */}
 
           <Modal
             header="Create a group"
