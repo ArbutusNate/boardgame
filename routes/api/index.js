@@ -166,7 +166,6 @@ router.post("/newgame/:gameid/:uid/:owned", (req, res) => {
 						});
 						}
 					})
-					
 			})
 		})
 })
@@ -328,14 +327,18 @@ router.get("/user/search/:searchQuery/", (req, res) => {
 })
 
 //Route for adding a notification
-router.post("/user/:uid/addnotification/:seconduid", (req, res) => {
+router.post("/notes/:uid/addnotification/:seconduid", (req, res) => {
+	console.log("wtf recieved")
 	let userID = req.params.uid;
 	let secondUserID = req.params.seconduid
 	console.log(`We be addin notifications ${userID} ${secondUserID}`);
-	User.findOneAndUpdate({ _id: userID}, {$push: {notifications: secondUserID} }).exec((error, result) => {
-		console.log(error)
-		socketHelper.updateUser(userID, "notifications");
-		res.json(result);
+	User.findOneAndUpdate({_id: userID}, {$push: {notifications: secondUserID} }).exec((error, result) => {
+		if(!err) {
+			socketHelper.updateUser(userID, "notifications");
+			res.json(result);
+		} else {
+			console.log(error);
+		}
 	})
 })
 

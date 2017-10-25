@@ -16,14 +16,14 @@ class Friendslist extends Component {
 
 	showMyFriends = () => {
 		let activeUser = this.props.uID;
-		console.log("finding my friends");
-		console.log("finding friends of " + this.props.uID);
+		// console.log("finding my friends");
+		// console.log("finding friends of " + this.props.uID);
 		Axios.get(`api/user/${activeUser}/friends`)
 			.then(res => {
-				console.log(res.data);
+				// console.log(res.data);
 				this.setState({friends: res.data.friends, friendsView: 'mine'})
 			}).catch(function(error) {
-				console.log("error in showMyFriends");
+				// console.log("error in showMyFriends");
 				console.error(error)
 			})
 	}
@@ -66,10 +66,12 @@ class Friendslist extends Component {
 
 
 	addNotification = (event) => {
+		console.log("button click");
 		let activeUser = this.props.uID;
 		let secondUser = event.target.dataset.id;
-		let route = `/api/user/${secondUser}/addNotification/${activeUser}`
-		Axios.post(route)
+		let route = `/api/notes/${secondUser}/addnotification/${activeUser}`;
+		console.log(route);
+		Axios.post(route).then(res => console.log(res))
 		this.showAllFriends()
 	}
 
