@@ -69,10 +69,10 @@ class Friendslist extends Component {
 		console.log("button click");
 		let activeUser = this.props.uID;
 		let secondUser = event.target.dataset.id;
-		let route = `/api/notes/${secondUser}/addnotification/${activeUser}`;
+		let route = `/api/user/addnotification/${secondUser}/${activeUser}`
 		console.log(route);
-		Axios.post(route).then(res => console.log(res))
-		this.showAllFriends()
+		Axios.post(route);
+		this.showAllFriends();
 	}
 
 	removeFriend = (event) => {
